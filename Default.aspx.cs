@@ -70,9 +70,15 @@ public partial class _Default : System.Web.UI.Page
                     rptFile = this.Server.MapPath("rpt/form4.rpt");
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
-                    report.SetParameterValue("billNo", Request["billNo"] );
-                   
-                 break;           
+                    report.SetParameterValue("billNo", Request["billNo"] );                   
+                 break;    
+                 
+                 case 7:
+                    rptFile = this.Server.MapPath("rpt/productSUM.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("billNo", Request["billNo"] );                   
+                 break;        
                       
                 
             }
