@@ -78,7 +78,14 @@ public partial class _Default : System.Web.UI.Page
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
                     report.SetParameterValue("billNo", Request["billNo"] );                   
-                 break;        
+                 break;     
+                 
+                 case 8:
+                    rptFile = this.Server.MapPath("rpt/productSUMBatch.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
+                 break;
+                    
                       
                 
             }
