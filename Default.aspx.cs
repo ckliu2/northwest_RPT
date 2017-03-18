@@ -81,12 +81,22 @@ public partial class _Default : System.Web.UI.Page
                  break;     
                  
                  case 8:
-                    rptFile = this.Server.MapPath("rpt/productSUMBatch.rpt");
+                    rptFile = this.Server.MapPath("rpt/productSUMBatch_NotFinish.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
+                 break;
+                 
+                 case 9:
+                    rptFile = this.Server.MapPath("rpt/productSUMBatch_Finish.rpt");
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
                  break;
                     
-                      
+                 case 10:
+                    rptFile = this.Server.MapPath("rpt/product_report.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
+                 break;     
                 
             }
            
