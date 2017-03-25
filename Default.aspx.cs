@@ -98,6 +98,11 @@ public partial class _Default : System.Web.UI.Page
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
                  break;     
                 
+                 case 11:
+                    rptFile = this.Server.MapPath("rpt/product_report2.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
+                 break;
             }
            
             CrystalReportViewer1.ReportSource = report;
