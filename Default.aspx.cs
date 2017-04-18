@@ -103,6 +103,29 @@ public partial class _Default : System.Web.UI.Page
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");      
                  break;
+                 
+                  case 12:
+                    rptFile = this.Server.MapPath("rpt/Report3.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("saleNo", Request["saleNo"] );
+                    report.SetParameterValue("startDate", Request["startDate"] );
+                    report.SetParameterValue("endDate", Request["endDate"] );        
+                 break;   
+                 
+                  case 13:
+                    rptFile = this.Server.MapPath("rpt/workOrder.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("id", Request["id"] );                        
+                 break; 
+                 
+                  case 14:
+                    rptFile = this.Server.MapPath("rpt/Logistics.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("id", Request["id"] );                        
+                 break; 
             }
            
             CrystalReportViewer1.ReportSource = report;
