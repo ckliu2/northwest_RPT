@@ -8,8 +8,11 @@ using CrystalDecisions.Shared;
 using System.Configuration;
 
 
+
 public partial class _Default : System.Web.UI.Page
 {
+	  string onlinePDF="D:\\IIS\\northwest_RPT\\workOrders\\";
+	
     protected void Page_Load(object sender, EventArgs e)
     {
         string DBIP = ConfigurationSettings.AppSettings.Get("CrystalReport-DB-IP");
@@ -126,6 +129,14 @@ public partial class _Default : System.Web.UI.Page
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
                     report.SetParameterValue("id", Request["id"] );                        
                  break; 
+                 
+                   case 15:
+                    rptFile = this.Server.MapPath("rpt/workOrder.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("id", Request["id"] );    
+                    saveDisk(report,Request["date"], Request["id"]);                      
+                 break; 
             }
            
             CrystalReportViewer1.ReportSource = report;
@@ -137,4 +148,39 @@ public partial class _Default : System.Web.UI.Page
         }
         
     }
+    
+     public void SaveStreamToFile(string fileFullPath, System.IO.Stream stream)
+   {
+    if (stream.Length == 0) return;
+    // Create a FileStream object to write a stream to a file
+    using (System.IO.FileStream fileStream = System.IO.File.Create(fileFullPath, (int)stream.Length))
+    {
+        // Fill the bytes[] array with the stream data
+        byte[] bytesInStream = new byte[stream.Length];
+        stream.Read(bytesInStream, 0, (int)bytesInStream.Length);
+        // Use FileStream object to write to the specified file
+        fileStream.Write(bytesInStream, 0, bytesInStream.Length);
+     }
+   }
+    
+    
+  public void saveDisk(ReportDocument report,String filePath , String fileName)
+    {           	
+    	string FilePath =onlinePDF+"\\"+filePath+"\\"; 
+      try
+       {
+         if (!System.IO.Directory.Exists(FilePath))
+         {
+          System.IO.Directory.CreateDirectory(FilePath);
+         }
+        }
+     catch (Exception ex){}
+                    
+                System.IO.Stream stream1 = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                //byte[] bytes1 = new byte[stream1.Length];
+                //stream1.Read(bytes1, 0, bytes1.Length);
+                //stream1.Seek(0, System.IO.SeekOrigin.Begin);                
+                SaveStreamToFile(onlinePDF+"\\"+filePath+"\\"+fileName+".pdf", stream1);
+    }
+    
 }
