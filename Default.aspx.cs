@@ -137,6 +137,13 @@ public partial class _Default : System.Web.UI.Page
                     report.SetParameterValue("id", Request["id"] );    
                     saveDisk(report,Request["date"], Request["id"]);                      
                  break; 
+                 
+                  case 16:
+                    rptFile = this.Server.MapPath("rpt/product_report2_daily.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest"); 
+                    report.SetParameterValue("date", Request["date"] );        
+                 break;
             }
            
             CrystalReportViewer1.ReportSource = report;
