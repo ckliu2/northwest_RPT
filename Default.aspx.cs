@@ -144,6 +144,21 @@ public partial class _Default : System.Web.UI.Page
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest"); 
                     report.SetParameterValue("date", Request["date"] );        
                  break;
+                 
+                 
+                  case 17:
+                    rptFile = this.Server.MapPath("rpt/Logistics1.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("id", Request["id"] );                        
+                 break; 
+                 
+                  case 18:
+                    rptFile = this.Server.MapPath("rpt/Logistics2.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("id", Request["id"] );                        
+                 break; 
             }
            
             CrystalReportViewer1.ReportSource = report;
