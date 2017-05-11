@@ -24,6 +24,7 @@ public partial class _Default : System.Web.UI.Page
             string rptFile = "";
             ReportDocument report = new ReportDocument();
             int i = Convert.ToInt16(Request["rpt"]);
+            string randomId=Request["randomId"];
             switch (i)
             {
                 case 0:
@@ -127,15 +128,8 @@ public partial class _Default : System.Web.UI.Page
                     rptFile = this.Server.MapPath("rpt/Logistics.rpt");
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
-                    report.SetParameterValue("id", Request["id"] );                        
-                 break; 
-                 
-                   case 15:
-                    rptFile = this.Server.MapPath("rpt/workOrder.rpt");
-                    report.Load(rptFile);                    
-                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
-                    report.SetParameterValue("id", Request["id"] );    
-                    saveDisk(report,Request["date"], Request["id"]);                      
+                    report.SetParameterValue("id", Request["id"] ); 
+                    saveDisk1(report, randomId);                           
                  break; 
                  
                   case 16:
@@ -150,14 +144,16 @@ public partial class _Default : System.Web.UI.Page
                     rptFile = this.Server.MapPath("rpt/Logistics1.rpt");
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
-                    report.SetParameterValue("id", Request["id"] );                        
+                    report.SetParameterValue("id", Request["id"] ); 
+                    saveDisk1(report, randomId);                       
                  break; 
                  
                   case 18:
                     rptFile = this.Server.MapPath("rpt/Logistics2.rpt");
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
-                    report.SetParameterValue("id", Request["id"] );                        
+                    report.SetParameterValue("id", Request["id"] );    
+                    saveDisk1(report, randomId);                    
                  break; 
             }
            
@@ -171,7 +167,17 @@ public partial class _Default : System.Web.UI.Page
         
     }
     
-     public void SaveStreamToFile(string fileFullPath, System.IO.Stream stream)
+     public void saveDisk1(ReportDocument report, String fileName)
+    {       
+                    
+                System.IO.Stream stream1 = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+                //byte[] bytes1 = new byte[stream1.Length];
+                //stream1.Read(bytes1, 0, bytes1.Length);
+                //stream1.Seek(0, System.IO.SeekOrigin.Begin);                
+                SaveStreamToFile(onlinePDF+"\\"+fileName+".pdf", stream1);
+    }
+    
+      public void SaveStreamToFile(string fileFullPath, System.IO.Stream stream)
    {
     if (stream.Length == 0) return;
     // Create a FileStream object to write a stream to a file
@@ -184,25 +190,7 @@ public partial class _Default : System.Web.UI.Page
         fileStream.Write(bytesInStream, 0, bytesInStream.Length);
      }
    }
-    
-    
-  public void saveDisk(ReportDocument report,String filePath , String fileName)
-    {           	
-    	string FilePath =onlinePDF+"\\"+filePath+"\\"; 
-      try
-       {
-         if (!System.IO.Directory.Exists(FilePath))
-         {
-          System.IO.Directory.CreateDirectory(FilePath);
-         }
-        }
-     catch (Exception ex){}
-                    
-                System.IO.Stream stream1 = report.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-                //byte[] bytes1 = new byte[stream1.Length];
-                //stream1.Read(bytes1, 0, bytes1.Length);
-                //stream1.Seek(0, System.IO.SeekOrigin.Begin);                
-                SaveStreamToFile(onlinePDF+"\\"+filePath+"\\"+fileName+".pdf", stream1);
-    }
+        
+   
     
 }
