@@ -25,6 +25,7 @@ public partial class _Default : System.Web.UI.Page
             ReportDocument report = new ReportDocument();
             int i = Convert.ToInt16(Request["rpt"]);
             string randomId=Request["randomId"];
+            string billno=Request["billno"];
             switch (i)
             {
                 case 0:
@@ -129,7 +130,7 @@ public partial class _Default : System.Web.UI.Page
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
                     report.SetParameterValue("id", Request["id"] ); 
-                    saveDisk1(report, randomId);                           
+                    saveDisk1(report, billno);                           
                  break; 
                  
                   case 16:
@@ -145,7 +146,7 @@ public partial class _Default : System.Web.UI.Page
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
                     report.SetParameterValue("id", Request["id"] ); 
-                    saveDisk1(report, randomId);                       
+                    saveDisk1(report, billno);                       
                  break; 
                  
                   case 18:
@@ -153,7 +154,7 @@ public partial class _Default : System.Web.UI.Page
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
                     report.SetParameterValue("id", Request["id"] );    
-                    saveDisk1(report, randomId);                    
+                    saveDisk1(report, billno);                    
                  break; 
             }
            
