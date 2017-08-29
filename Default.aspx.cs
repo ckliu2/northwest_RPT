@@ -156,6 +156,20 @@ public partial class _Default : System.Web.UI.Page
                     report.SetParameterValue("id", Request["id"] );    
                     saveDisk1(report, billno);                    
                  break; 
+                 
+                  case 19:
+                    rptFile = this.Server.MapPath("rpt/Report5.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest"); 
+                    report.SetParameterValue("start", Request["start"] );     
+                    report.SetParameterValue("end", Request["end"] );      
+                 break;
+                 
+                 case 20:
+                    rptFile = this.Server.MapPath("rpt/CIPCR001.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");                      
+                 break;
             }
            
             CrystalReportViewer1.ReportSource = report;
