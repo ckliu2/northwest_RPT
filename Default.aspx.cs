@@ -170,6 +170,21 @@ public partial class _Default : System.Web.UI.Page
                     report.Load(rptFile);                    
                     report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");                      
                  break;
+                 
+                  case 21:
+                    rptFile = this.Server.MapPath("rpt/OutputEquipment.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");                      
+                 break;
+                 
+                 case 22:
+                    rptFile = this.Server.MapPath("rpt/turnoverBySalesMen.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("startDate", Request["startDate"] );
+                    report.SetParameterValue("endDate", Request["endDate"] );
+                 break; 
+                 
             }
            
             CrystalReportViewer1.ReportSource = report;
