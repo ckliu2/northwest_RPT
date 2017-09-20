@@ -1,0 +1,1 @@
+http://localhost:81/CIP/CrReport/CIPCR001.aspx??RenderMode=link&gid=BD01&compid=402&compidend=402&ddate=20170701&ddateend=20170730
