@@ -206,6 +206,24 @@ public partial class _Default : System.Web.UI.Page
                     report.SetParameterValue("date", Request["date"] );
                  break;
                  
+                  case 26:
+                    rptFile = this.Server.MapPath("rpt/Report9.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("startDate", Request["startDate"] );
+                    report.SetParameterValue("endDate", Request["endDate"] );
+                 break; 
+                 
+                 case 27:
+                    rptFile = this.Server.MapPath("rpt/Report10.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("sdate", Request["sdate"] );
+                    report.SetParameterValue("edate", Request["edate"] );
+                    report.SetParameterValue("products", "'"+ Request["products"] + "'" );
+                    report.SetParameterValue("customerIds", "'"+ Request["customerIds"] + "'" );
+                 break; 
+                 
             }
            
             CrystalReportViewer1.ReportSource = report;
