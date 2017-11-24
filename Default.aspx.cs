@@ -224,6 +224,20 @@ public partial class _Default : System.Web.UI.Page
                     report.SetParameterValue("customerIds", "'"+ Request["customerIds"] + "'" );
                  break; 
                  
+                 
+                  case 28:
+                    rptFile = this.Server.MapPath("rpt/Freight.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");                      
+                 break;
+                 
+                   case 29:
+                    rptFile = this.Server.MapPath("rpt/Report8_1.rpt");
+                    report.Load(rptFile);                    
+                    report.SetDatabaseLogon(UserID, UserPassword, DBIP, "northwest");
+                    report.SetParameterValue("date", Request["date"] );
+                 break;
+                 
             }
            
             CrystalReportViewer1.ReportSource = report;
